@@ -1,44 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My First Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plaza | My Personal Website</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    h1 {
-      color: #1877f2;
-    }
-
-    p {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #f7f9fc;
       color: #333;
-      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #1877f2;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    nav {
+      background: #145dbf;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 2rem 1.5rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #1877f2;
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #145dbf;
+      color: white;
+      font-size: 14px;
     }
 
     button {
-      background-color: #1877f2;
+      background: #1877f2;
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 8px;cursor:
-      pointer;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
       font-size: 16px;
     }
 
     button:hover {
-      background-color: #145dbf;
+      background: #145dbf;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to My First Website ONI!</h1>
-  <p>This is my practice page. I made this myself 🎉</p>
+  <header>
+    <h1>Welcome to PlazaPH</h1>
+    <p>Learning. Building. Growing.</p>
+  </header>
 
-  <button onclick="alert('You clicked the button!')">Click Me</button>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>Hello! I’m PlazaPH a curious learner exploring how websites work. This is my personal space to practice coding and creativity. I love building, learning new things, and sharing what I create.</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="card">
+      <h2>My Projects</h2>
+      <ul>
+        <li>🌐 Created my first HTML website</li>
+        <li>🎨 Learning CSS for styling</li>
+        <li>⚙️ Planning to add JavaScript features next</li>
+      </ul>
+      <button onclick="alert('Keep building your projects! 🚀')">See More</button>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="card">
+      <h2>Contact</h2>
+      <p>If you’d like to connect, you can reach out safely through GitHub or add a contact form later.</p>
+      <p>GitHub: <a href="https://github.com/YOURUSERNAME" target="_blank">github.com/YOURUSERNAME</a></p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Plaza — Built with ❤️ and curiosity.
+  </footer>
 </body>
-</html>
-
+</html
