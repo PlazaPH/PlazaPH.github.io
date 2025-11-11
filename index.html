@@ -3,30 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plaza | My Personal Website</title>
+  <title>HughCars - Car Marketplace</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
       margin: 0;
-      font-family: "Poppins", sans-serif;
-      background-color: #f7f9fc;
-      color: #333;
-      line-height: 1.6;
+      padding: 0;
     }
 
     header {
-      background-color: #1877f2;
+      background-color: #222;
       color: white;
       text-align: center;
       padding: 2rem 1rem;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
+    header h1 { margin: 0; }
+    header p { margin: 0.5rem 0 0; }
 
     nav {
-      background: #145dbf;
+      background-color: #333;
       text-align: center;
       padding: 0.5rem;
     }
@@ -38,93 +35,211 @@
       font-weight: bold;
     }
 
-    nav a:hover {
-      text-decoration: underline;
+    nav a:hover { text-decoration: underline; }
+
+    section { padding: 2rem 1rem; max-width: 1200px; margin: auto; }
+
+    .filter {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
     }
 
-    section {
-      padding: 2rem 1.5rem;
-      max-width: 900px;
-      margin: auto;
+    .filter select, .filter input[type="range"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
 
-    .card {
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .car-card {
       background: white;
       border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    h2 {
-      color: #1877f2;
-      margin-top: 0;
+    .car-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
+
+    .car-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .car-details h2 {
+      margin: 0 0 0.5rem;
+      color: #222;
+    }
+
+    .car-details p { margin: 0.3rem 0; }
+
+    .availability { font-weight: bold; color: green; }
+    .unavailable { color: red; }
 
     footer {
+      background-color: #222;
+      color: white;
       text-align: center;
       padding: 1rem;
-      background: #145dbf;
-      color: white;
-      font-size: 14px;
+      margin-top: 2rem;
     }
 
-    button {
-      background: #1877f2;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background: #145dbf;
+    .price-label {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to PlazaPH</h1>
-    <p>Learning. Building. Growing.</p>
+    <h1>HughCars</h1>
+    <p>Your ultimate car marketplace 🚗</p>
   </header>
 
   <nav>
+    <a href="#cars">Cars</a>
     <a href="#about">About</a>
-    <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <section id="about">
-    <div class="card">
-      <h2>About Me</h2>
-      <p>Hello! I’m PlazaPH a curious learner exploring how websites work. This is my personal space to practice coding and creativity. I love building, learning new things, and sharing what I create.</p>
+  <section id="cars">
+    <div class="filter">
+      <select id="brandFilter" onchange="filterCars()">
+        <option value="">All Brands</option>
+        <option value="Toyota">Toyota</option>
+        <option value="Ford">Ford</option>
+      </select>
+
+      <select id="yearFilter" onchange="filterCars()">
+        <option value="">All Years</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+      </select>
+
+      <select id="availabilityFilter" onchange="filterCars()">
+        <option value="">All</option>
+        <option value="In Stock">In Stock</option>
+        <option value="Coming Soon">Coming Soon</option>
+      </select>
+
+      <select id="colorFilter" onchange="filterCars()">
+        <option value="">All Colors</option>
+        <option value="Red">Red</option>
+        <option value="White">White</option>
+        <option value="Black">Black</option>
+        <option value="Blue">Blue</option>
+      </select>
+    </div>
+
+    <div class="filter">
+      <div class="price-label">Max Price: $<span id="priceValue">50000</span></div>
+      <input type="range" id="priceFilter" min="10000" max="50000" step="1000" value="50000" oninput="updatePriceValue(); filterCars()">
+    </div>
+
+    <div class="car-grid">
+      <!-- Toyota Camry -->
+      <div class="car-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/2018_Toyota_Camry_XSE_front_6.7.18.jpg/320px-2018_Toyota_Camry_XSE_front_6.7.18.jpg" alt="Toyota Camry">
+        <div class="car-details">
+          <h2>Toyota Camry</h2>
+          <p><strong>Brand:</strong> Toyota</p>
+          <p><strong>Model:</strong> Camry</p>
+          <p><strong>Year:</strong> 2022</p>
+          <p><strong>Price:</strong> $28,000</p>
+          <p><strong>Features:</strong> ABS, Bluetooth, Leather Seats</p>
+          <p><strong>Available Colors:</strong> Red, White, Black</p>
+          <p><strong>Transmission:</strong> Automatic</p>
+          <p><strong>Fuel Type:</strong> Gasoline</p>
+          <p class="availability">In Stock</p>
+        </div>
+      </div>
+
+      <!-- Ford Mustang -->
+      <div class="car-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/2021_Ford_Mustang_GT_5.0_Front.jpg/320px-2021_Ford_Mustang_GT_5.0_Front.jpg" alt="Ford Mustang">
+        <div class="car-details">
+          <h2>Ford Mustang</h2>
+          <p><strong>Brand:</strong> Ford</p>
+          <p><strong>Model:</strong> Mustang</p>
+          <p><strong>Year:</strong> 2023</p>
+          <p><strong>Price:</strong> $45,000</p>
+          <p><strong>Features:</strong> Sport Mode, Bluetooth, Leather Seats</p>
+          <p><strong>Available Colors:</strong> Blue, Black</p>
+          <p><strong>Transmission:</strong> Manual</p>
+          <p><strong>Fuel Type:</strong> Gasoline</p>
+          <p class="unavailable">Coming Soon</p>
+        </div>
+      </div>
+
+      <!-- Add more cars here -->
     </div>
   </section>
 
-  <section id="projects">
-    <div class="card">
-      <h2>My Projects</h2>
-      <ul>
-        <li>🌐 Created my first HTML website</li>
-        <li>🎨 Learning CSS for styling</li>
-        <li>⚙️ Planning to add JavaScript features next</li>
-      </ul>
-      <button onclick="alert('Keep building your projects! 🚀')">See More</button>
-    </div>
+  <section id="about">
+    <h2>About HughCars</h2>
+    <p>HughCars is your go-to website for browsing cars, comparing prices, and checking availability. Our goal is to provide clear, accurate, and easy-to-read car information for enthusiasts and buyers alike.</p>
   </section>
 
   <section id="contact">
-    <div class="card">
-      <h2>Contact</h2>
-      <p>If you’d like to connect, you can reach out safely through GitHub or add a contact form later.</p>
-      <p>GitHub: <a href="https://github.com/YOURUSERNAME" target="_blank">github.com/YOURUSERNAME</a></p>
-    </div>
+    <h2>Contact Us</h2>
+    <p>Email: contact@hughcars.com</p>
+    <p>Instagram: @hughcars</p>
   </section>
 
   <footer>
-    © 2025 Plaza — Built with ❤️ and curiosity.
+    &copy; 2025 HughCars - All Rights Reserved
   </footer>
+
+  <script>
+    const priceValueSpan = document.getElementById('priceValue');
+
+    function updatePriceValue() {
+      priceValueSpan.innerText = document.getElementById('priceFilter').value;
+    }
+
+    function filterCars() {
+      const brand = document.getElementById('brandFilter').value.toLowerCase();
+      const year = document.getElementById('yearFilter').value.toLowerCase();
+      const availability = document.getElementById('availabilityFilter').value.toLowerCase();
+      const color = document.getElementById('colorFilter').value.toLowerCase();
+      const maxPrice = parseInt(document.getElementById('priceFilter').value);
+
+      const cars = document.querySelectorAll('.car-card');
+
+      cars.forEach(car => {
+        const text = car.innerText.toLowerCase();
+        const colorsText = car.querySelector('.car-details p:nth-of-type(6)').innerText.toLowerCase();
+        const priceText = car.querySelector('.car-details p:nth-of-type(4)').innerText.replace(/[^0-9]/g,'');
+        const price = parseInt(priceText);
+
+        const matchesBrand = brand === "" || text.includes(brand);
+        const matchesYear = year === "" || text.includes(year);
+        const matchesAvailability = availability === "" || text.includes(availability);
+        const matchesColor = color === "" || colorsText.includes(color);
+        const matchesPrice = price <= maxPrice;
+
+        if (matchesBrand && matchesYear && matchesAvailability && matchesColor && matchesPrice) {
+          car.style.display = "block";
+        } else {
+          car.style.display = "none";
+        }
+      });
+    }
+  </script>
 </body>
-</html
+</html>
