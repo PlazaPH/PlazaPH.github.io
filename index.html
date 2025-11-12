@@ -3,243 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HughCars - Car Marketplace</title>
+  <title>DonEmilianoCARS: Certified Exclusivity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
       margin: 0;
-      padding: 0;
+      background-color: #0b0b0b;
+      color: #d4af37;
+      font-family: 'Playfair Display', serif;
+      overflow-x: hidden;
     }
 
-    header {
-      background-color: #222;
-      color: white;
+    /* ===== MASTHEAD ===== */
+    .masthead {
+      background-color: #3c0d0d;
+      color: #d4af37;
+      font-size: 14px;
+      padding: 8px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #d4af37;
+    }
+
+    .masthead a {
+      color: #d4af37;
+      text-decoration: none;
+      margin-left: 10px;
+      font-size: 16px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1542365885-bb4c4e9e3f75');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 2rem 1rem;
+      color: #d4af37;
     }
 
-    header h1 { margin: 0; }
-    header p { margin: 0.5rem 0 0; }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
 
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 60px;
+      margin-bottom: 10px;
+      color: #d4af37;
+    }
+
+    .hero h2 {
+      font-size: 24px;
+      letter-spacing: 3px;
+      color: #e2c675;
+    }
+
+    /* ===== NAVIGATION ===== */
     nav {
-      background-color: #333;
+      background-color: #f5f1e6;
       text-align: center;
-      padding: 0.5rem;
+      padding: 15px 0;
     }
 
     nav a {
-      color: white;
+      margin: 0 20px;
+      color: #2b2b2b;
       text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+      font-family: 'Cinzel', serif;
     }
 
-    nav a:hover { text-decoration: underline; }
-
-    section { padding: 2rem 1rem; max-width: 1200px; margin: auto; }
-
-    .filter {
-      margin-bottom: 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #d4af37;
+      transition: width 0.3s;
     }
 
-    .filter select, .filter input[type="range"] {
-      padding: 10px;
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== WELCOME SECTION ===== */
+    .welcome {
+      background-color: #f5f1e6;
+      color: #3b2b1b;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .welcome h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      font-family: 'Cinzel', serif;
+    }
+
+    .welcome p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .welcome button {
+      background-color: #3c0d0d;
+      color: #d4af37;
+      border: none;
+      padding: 15px 35px;
       font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      font-family: 'Cinzel', serif;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: 0.3s;
     }
 
-    .car-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+    .welcome button:hover {
+      background-color: #d4af37;
+      color: #3c0d0d;
     }
 
-    .car-card {
-      background: white;
+    /* ===== FEATURED ARTICLES ===== */
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 80px 40px;
+      background-color: #0b0b0b;
+    }
+
+    .feature {
+      position: relative;
+      width: 45%;
+      height: 400px;
+      overflow: hidden;
       border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .car-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-
-    .car-card img {
+    .feature img {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 1rem;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%);
+      transition: transform 0.4s ease;
     }
 
-    .car-details h2 {
-      margin: 0 0 0.5rem;
-      color: #222;
+    .feature:hover img {
+      transform: scale(1.05);
     }
 
-    .car-details p { margin: 0.3rem 0; }
-
-    .availability { font-weight: bold; color: green; }
-    .unavailable { color: red; }
-
-    footer {
-      background-color: #222;
+    .feature h3 {
+      position: absolute;
+      bottom: 80px;
+      left: 30px;
       color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+      font-size: 32px;
+      font-family: 'Cinzel', serif;
     }
 
-    .price-label {
+    .feature button {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      background-color: #3c0d0d;
+      color: #d4af37;
+      border: none;
+      padding: 10px 25px;
+      font-family: 'Cinzel', serif;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .feature button:hover {
+      background-color: #d4af37;
+      color: #3c0d0d;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: #3c0d0d;
+      color: #d4af37;
+      padding: 60px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid #d4af37;
+    }
+
+    footer div {
+      flex: 1 1 200px;
+      margin-bottom: 20px;
+    }
+
+    footer h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer a {
+      color: #d4af37;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    footer p {
+      font-size: 14px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #d4af37;
       text-align: center;
-      width: 100%;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
+      padding-top: 10px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>HughCars</h1>
-    <p>Your ultimate car marketplace 🚗</p>
-  </header>
 
+  <!-- ===== MASTHEAD ===== -->
+  <div class="masthead">
+    <div>Email: <strong>DonEmil@gmail.com</strong></div>
+    <div>Follow Us:
+      <a href="#">Instagram</a> | <a href="#">Facebook</a>
+    </div>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <div class="hero">
+    <div class="hero-content">
+      <img src="A_webpage_for_DonEmilianoCARS_showcases_the_luxury.png" alt="DonEmilianoCARS Logo" style="width:200px; margin-bottom:20px;">
+      <h1>DonEmilianoCARS</h1>
+      <h2>CERTIFIED EXCLUSIVITY</h2>
+    </div>
+  </div>
+
+  <!-- ===== NAVIGATION ===== -->
   <nav>
-    <a href="#cars">Cars</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#">HOME</a>
+    <a href="#">THE COLLECTION</a>
+    <a href="#">THE DONEMILIANO STANDARD</a>
+    <a href="#">CONTACT</a>
   </nav>
 
-  <section id="cars">
-    <div class="filter">
-      <select id="brandFilter" onchange="filterCars()">
-        <option value="">All Brands</option>
-        <option value="Toyota">Toyota</option>
-        <option value="Ford">Ford</option>
-      </select>
+  <!-- ===== EDITOR'S WELCOME ===== -->
+  <section class="welcome">
+    <h2>True Luxury is Flawless.</h2>
+    <p>
+      Welcome to DonEmilianoCARS. We are not a dealership; we are curators of certified, pre-owned luxury. 
+      We built our name on a simple premise: the world's finest automobiles should come with absolute peace of mind. 
+      Explore our collection, built on Exclusivity and guaranteed by Trust.
+    </p>
+    <button>LEARN ABOUT OUR 120 POINT STANDARD</button>
+  </section>
 
-      <select id="yearFilter" onchange="filterCars()">
-        <option value="">All Years</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-      </select>
-
-      <select id="availabilityFilter" onchange="filterCars()">
-        <option value="">All</option>
-        <option value="In Stock">In Stock</option>
-        <option value="Coming Soon">Coming Soon</option>
-      </select>
-
-      <select id="colorFilter" onchange="filterCars()">
-        <option value="">All Colors</option>
-        <option value="Red">Red</option>
-        <option value="White">White</option>
-        <option value="Black">Black</option>
-        <option value="Blue">Blue</option>
-      </select>
+  <!-- ===== FEATURED ARTICLES ===== -->
+  <section class="features">
+    <div class="feature">
+      <img src="https://images.unsplash.com/photo-1517153299409-7c5dc21da09b" alt="Luxury Cars">
+      <h3>The Collection</h3>
+      <button>Browse by Brand</button>
     </div>
-
-    <div class="filter">
-      <div class="price-label">Max Price: $<span id="priceValue">50000</span></div>
-      <input type="range" id="priceFilter" min="10000" max="50000" step="1000" value="50000" oninput="updatePriceValue(); filterCars()">
-    </div>
-
-    <div class="car-grid">
-      <!-- Toyota Camry -->
-      <div class="car-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/2018_Toyota_Camry_XSE_front_6.7.18.jpg/320px-2018_Toyota_Camry_XSE_front_6.7.18.jpg" alt="Toyota Camry">
-        <div class="car-details">
-          <h2>Toyota Camry</h2>
-          <p><strong>Brand:</strong> Toyota</p>
-          <p><strong>Model:</strong> Camry</p>
-          <p><strong>Year:</strong> 2022</p>
-          <p><strong>Price:</strong> $28,000</p>
-          <p><strong>Features:</strong> ABS, Bluetooth, Leather Seats</p>
-          <p><strong>Available Colors:</strong> Red, White, Black</p>
-          <p><strong>Transmission:</strong> Automatic</p>
-          <p><strong>Fuel Type:</strong> Gasoline</p>
-          <p class="availability">In Stock</p>
-        </div>
-      </div>
-
-      <!-- Ford Mustang -->
-      <div class="car-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/2021_Ford_Mustang_GT_5.0_Front.jpg/320px-2021_Ford_Mustang_GT_5.0_Front.jpg" alt="Ford Mustang">
-        <div class="car-details">
-          <h2>Ford Mustang</h2>
-          <p><strong>Brand:</strong> Ford</p>
-          <p><strong>Model:</strong> Mustang</p>
-          <p><strong>Year:</strong> 2023</p>
-          <p><strong>Price:</strong> $45,000</p>
-          <p><strong>Features:</strong> Sport Mode, Bluetooth, Leather Seats</p>
-          <p><strong>Available Colors:</strong> Blue, Black</p>
-          <p><strong>Transmission:</strong> Manual</p>
-          <p><strong>Fuel Type:</strong> Gasoline</p>
-          <p class="unavailable">Coming Soon</p>
-        </div>
-      </div>
-
-      <!-- Add more cars here -->
+    <div class="feature">
+      <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6" alt="Inspection Process">
+      <h3>The Guarantee</h3>
+      <button>Explore Our 120-Point Inspection</button>
     </div>
   </section>
 
-  <section id="about">
-    <h2>About HughCars</h2>
-    <p>HughCars is your go-to website for browsing cars, comparing prices, and checking availability. Our goal is to provide clear, accurate, and easy-to-read car information for enthusiasts and buyers alike.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: contact@hughcars.com</p>
-    <p>Instagram: @hughcars</p>
-  </section>
-
+  <!-- ===== FOOTER ===== -->
   <footer>
-    &copy; 2025 HughCars - All Rights Reserved
+    <div>
+      <h4>DonEmilianoCARS</h4>
+      <p>Certified Exclusivity. Trusted Luxury.</p>
+    </div>
+    <div>
+      <h4>Maps</h4>
+      <a href="#">Home</a>
+      <a href="#">The Collection</a>
+      <a href="#">The Standard</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Email: DonEmil@gmail.com</p>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
   </footer>
 
-  <script>
-    const priceValueSpan = document.getElementById('priceValue');
+  <div class="footer-bottom">
+    © 2025 DonEmilianoCARS. All Rights Reserved.
+  </div>
 
-    function updatePriceValue() {
-      priceValueSpan.innerText = document.getElementById('priceFilter').value;
-    }
-
-    function filterCars() {
-      const brand = document.getElementById('brandFilter').value.toLowerCase();
-      const year = document.getElementById('yearFilter').value.toLowerCase();
-      const availability = document.getElementById('availabilityFilter').value.toLowerCase();
-      const color = document.getElementById('colorFilter').value.toLowerCase();
-      const maxPrice = parseInt(document.getElementById('priceFilter').value);
-
-      const cars = document.querySelectorAll('.car-card');
-
-      cars.forEach(car => {
-        const text = car.innerText.toLowerCase();
-        const colorsText = car.querySelector('.car-details p:nth-of-type(6)').innerText.toLowerCase();
-        const priceText = car.querySelector('.car-details p:nth-of-type(4)').innerText.replace(/[^0-9]/g,'');
-        const price = parseInt(priceText);
-
-        const matchesBrand = brand === "" || text.includes(brand);
-        const matchesYear = year === "" || text.includes(year);
-        const matchesAvailability = availability === "" || text.includes(availability);
-        const matchesColor = color === "" || colorsText.includes(color);
-        const matchesPrice = price <= maxPrice;
-
-        if (matchesBrand && matchesYear && matchesAvailability && matchesColor && matchesPrice) {
-          car.style.display = "block";
-        } else {
-          car.style.display = "none";
-        }
-      });
-    }
-  </script>
 </body>
-</html>
+</html> 
+
